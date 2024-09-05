@@ -131,11 +131,105 @@
       scale: 110%;
     }
   }
+  #testConfig {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    border: #444 2px solid;
+    border-radius: 12px;
+    box-sizing: border-box;
+    height: 40px;
+    width: 280px;
+    padding: 0;
+    margin: auto;
+    text-align: center;
+  }
+  .mode {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+    padding: 0;
+    margin: auto;
+    text-align: center;
+    gap: 12px;
+  }
+  .time {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    place-content: center;
+    padding: 0;
+    margin: auto;
+    gap: 8px;
+  }
+  .textButton {
+    display: inline-flex;
+    flex-direction: row;
+    place-content: center;
+    margin: auto;
+    padding: 0;
+    padding-inline: 2px;
+  }
+  .textButton.active {
+    color: var(--yellow);
+    background-color: transparent;
+    opacity: 1;
+  }
+  .textButton:hover {
+    background-color: transparent;
+  }
+  .words {
+    display: none;
+    flex-direction: row;
+    text-align: center;
+    place-content: center;
+    padding: 0;
+    margin: auto;
+    gap: 8px;
+  }
 </style>
 
 <body>
   <main>
     <section id="game">
+      <div id="testConfig">
+        <div class="mode">
+          <button class="textButton active" mode="time" id="btnTime">
+            <i class="fas fa-fw fa-clock"></i>
+            time
+          </button>
+          <button class="textButton" mode="words" id="btnWords">
+            <i class="fas fa-fw fa-font"></i>
+            words
+          </button>
+        </div>
+        <div class="time" id="timeConfig">
+          <button class="textButton" timeconfig="15">
+            <span>15</span>
+          </button>
+          <button class="textButton active" timeconfig="30">
+            <span>30</span>
+          </button>
+          <button class="textButton" timeconfig="60">
+            <span>60</span>
+          </button>
+          <button class="textButton" timeconfig="120">
+            <span>120</span>
+          </button>
+        </div>
+        <div class="words" id="wordsConfig">
+          <button class="textButton" wordcount="10"><span>10</span></button>
+          <button class="textButton" wordcount="25"><span>25</span></button>
+          <button class="textButton" wordcount="50"><span>50</span></button>
+          <button class="textButton" wordcount="100">
+            <span>100</span>
+          </button>
+          <button class="textButton" wordcount="custom">
+            <i class="fas fa-fw fa-tools"></i>
+          </button>
+        </div>
+      </div>
       <time></time>
       <p></p>
       <input autofocus />
@@ -173,7 +267,11 @@
 
 <script type="module">
   import { words as INITIAL_WORDS } from "./words.js";
-
+  import { config } from "./config.js";
+  let optionTime = window.localStorage.getItem("time");
+  let optionWords = window.localStorage.getItem("words");
+  const $timeConfig = document.querySelector("#timeConfig");
+  const $wordsConfig = document.querySelector("#wordsConfig");
   const $time = document.querySelector("time");
   const $paragraph = document.querySelector("p");
   const $input = document.querySelector("input");
@@ -183,17 +281,100 @@
   const $record = $results.querySelector("#results-record");
   const $accuracy = $results.querySelector("#results-accuracy");
   const $button = document.querySelector("#reload-button");
+  const $btnTime = document.querySelector("#btnTime");
+  const $btnWords = document.querySelector("#btnWords");
+
   const $localStorageRecord = window.localStorage.getItem("record");
 
-  const INITIAL_TIME = 30;
-
+  let INITIAL_TIME = 0;
   let words = [];
+  if (optionTime) {
+    INITIAL_TIME = optionTime;
+  } else {
+    INITIAL_TIME = config.time;
+    window.localStorage.setItem("time", config.time);
+  }
+
+  if (!optionWords) {
+    optionWords = config.words;
+    window.localStorage.setItem("words", config.words);
+  }
+  console.log(optionWords);
   let currentTime = INITIAL_TIME;
   let playing;
-
+  initConfigMenu();
   initGame();
   initEvents();
+  function initConfigMenu() {
+    $timeConfig.querySelectorAll("button").forEach((btn) => {
+      if (btn.querySelector("span").innerHTML === optionTime) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    $wordsConfig.querySelectorAll("button").forEach((btn) => {
+      if (!btn.querySelector("span")) return;
+      console.log(btn.querySelector("span").innerHTML, optionWords);
+      if (btn.querySelector("span").innerHTML === optionWords) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+    $btnTime.addEventListener("click", (event) => {
+      $timeConfig.style.display = "flex";
+      $btnTime.classList.add("active");
+      $wordsConfig.style.display = "none";
+      $btnWords.classList.remove("active");
+    });
+    $btnWords.addEventListener("click", (event) => {
+      $wordsConfig.style.display = "flex";
+      $btnWords.classList.add("active");
+      $timeConfig.style.display = "none";
+      $btnTime.classList.remove("active");
+    });
 
+    $timeConfig.querySelectorAll("button").forEach((button) =>
+      button.addEventListener("click", (event) => {
+        const timeConfig = event.target.innerHTML;
+        if (timeConfig) {
+          const btn = $timeConfig.querySelectorAll("button");
+          btn.forEach((btn) => {
+            if (btn.querySelector("span").innerHTML === timeConfig) {
+              btn.classList.add("active");
+              window.localStorage.setItem("time", timeConfig);
+              INITIAL_TIME = timeConfig;
+              optionTime = timeConfig;
+              initGame();
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+        }
+      })
+    );
+
+    $wordsConfig.querySelectorAll("button").forEach((button) =>
+      button.addEventListener("click", (event) => {
+        const wordConfig = event.target.innerHTML;
+        if (wordConfig) {
+          const btn = $wordsConfig.querySelectorAll("button");
+          btn.forEach((btn) => {
+            if (!btn.querySelector("span")) return;
+            if (btn.querySelector("span").innerHTML === wordConfig) {
+              btn.classList.add("active");
+              window.localStorage.setItem("words", wordConfig);
+              optionWords = wordConfig;
+              initGame();
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+        }
+      })
+    );
+  }
   function initGame() {
     $game.style.display = "flex";
     $results.style.display = "none";
@@ -201,7 +382,10 @@
 
     playing = false;
 
-    words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 32);
+    words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(
+      0,
+      optionWords
+    );
     currentTime = INITIAL_TIME;
 
     $time.textContent = currentTime;
