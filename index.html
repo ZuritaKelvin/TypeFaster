@@ -94,6 +94,8 @@
 
   #game {
     display: flex;
+    flex-direction: column;
+    margin-top: 12px;
   }
 
   #results {
@@ -143,6 +145,9 @@
     width: 280px;
     padding: 0;
     margin: auto;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    margin-right: auto;
     text-align: center;
   }
   .mode {
@@ -189,10 +194,458 @@
     margin: auto;
     gap: 8px;
   }
+
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: var(--black);
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--yellow);
+  }
+
+  .logo-icon {
+    background: var(--yellow);
+    color: var(--black);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .profile-btn {
+    background: transparent;
+    border: 2px solid #444;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    position: relative;
+  }
+
+  .profile-btn:hover {
+    background: #444;
+    border-color: var(--yellow);
+    transform: scale(1.05);
+  }
+
+  .profile-icon {
+    font-size: 22px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .profile-btn:hover .profile-icon {
+    color: var(--yellow);
+  }
+
+  /* Modal */
+  #profileModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+  }
+
+  #profileModal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background: var(--black);
+    border: 2px solid #444;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .modal-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin: 0;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: var(--gray);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    line-height: 1;
+    width: auto;
+    height: auto;
+  }
+
+  .close-btn:hover {
+    color: var(--red);
+    transform: none;
+    background: transparent;
+  }
+
+  .profile-section {
+    margin-bottom: 25px;
+  }
+
+  .profile-label {
+    font-size: 14px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .profile-value {
+    font-size: 20px;
+    color: whitesmoke;
+    font-weight: 500;
+  }
+
+  .profile-input {
+    background: #333;
+    border: 2px solid #444;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 18px;
+    color: whitesmoke;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+
+  .profile-input:focus {
+    outline: none;
+    border-color: var(--yellow);
+  }
+
+  .edit-btn,
+  .save-btn {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+    opacity: 1;
+  }
+
+  .edit-btn:hover,
+  .save-btn:hover {
+    background: #c9a030;
+    transform: translateY(-2px);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .stat-card {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #444;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    color: var(--yellow);
+    font-weight: 600;
+  }
+
+  .config-display {
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    margin-top: 10px;
+  }
+
+  .config-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+  }
+
+  .config-item:last-child {
+    border-bottom: none;
+  }
+
+  .config-key {
+    color: var(--gray);
+    font-size: 14px;
+  }
+
+  .config-value {
+    color: whitesmoke;
+    font-weight: 500;
+  }
+
+  #game-container {
+    height: 100vh;
+    position: relative;
+  }
+
+  .config-select {
+    background: #333;
+    border: 2px solid #444;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: whitesmoke;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    min-width: 80px;
+  }
+
+  .config-select:focus {
+    outline: none;
+    border-color: var(--yellow);
+  }
+
+  .config-select option {
+    background: #333;
+    color: whitesmoke;
+  }
+
+  .config-edit-section {
+    margin-top: 15px;
+  }
+
+  .config-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .apply-config-btn {
+    background: var(--yellow);
+    color: var(--black);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 1;
+  }
+
+  .apply-config-btn:hover {
+    background: #c9a030;
+    transform: translateY(-2px);
+  }
 </style>
 
 <body>
-  <main>
+  <main id="game-container">
+    <header>
+      <div class="logo">
+        <span class="logo-icon">T</span>
+        <span>TypeFaster</span>
+      </div>
+      <button class="profile-btn" id="profileBtn">
+        <span class="profile-icon">⚙️</span>
+      </button>
+    </header>
+
+    <!-- Profile Modal -->
+    <div id="profileModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">Profile</h2>
+          <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+
+        <div class="profile-section">
+          <label class="profile-label">Name</label>
+          <div id="nameDisplay">
+            <span class="profile-value" id="displayName">You</span>
+            <button class="edit-btn" id="editNameBtn">Edit</button>
+          </div>
+          <div id="nameEdit" style="display: none">
+            <input
+              type="text"
+              class="profile-input"
+              id="nameInput"
+              placeholder="Enter your name"
+              maxlength="20"
+            />
+            <button class="save-btn" id="saveNameBtn">Save</button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Record</div>
+            <div class="stat-value" id="profileRecord">0</div>
+            <div style="font-size: 12px; color: var(--gray); margin-top: 4px">
+              WPM
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Time Played</div>
+            <div class="stat-value" id="profileTime">0</div>
+            <div style="font-size: 12px; color: var(--gray); margin-top: 4px">
+              minutes
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-section" style="margin-top: 30px">
+          <label class="profile-label">Configuration</label>
+          <div class="config-display">
+            <div class="config-item">
+              <span class="config-key">Mode:</span>
+              <span class="config-value" id="profileMode">time</span>
+            </div>
+            <div class="config-item">
+              <span class="config-key">Time:</span>
+              <span class="config-value" id="profileTimeConfig">30s</span>
+            </div>
+            <div class="config-item">
+              <span class="config-key">Words:</span>
+              <span class="config-value" id="profileWordsConfig">25</span>
+            </div>
+          </div>
+
+          <div class="config-edit-section">
+            <button class="edit-btn" id="editConfigBtn">
+              Edit Configuration
+            </button>
+
+            <div id="configEdit" style="display: none">
+              <div class="config-controls">
+                <label style="color: var(--gray); font-size: 14px">Mode:</label>
+                <select class="config-select" id="modeSelect">
+                  <option value="time">Time</option>
+                  <option value="words">Words</option>
+                </select>
+              </div>
+
+              <div class="config-controls">
+                <label style="color: var(--gray); font-size: 14px"
+                  >Time (seconds):</label
+                >
+                <select class="config-select" id="timeSelect">
+                  <option value="15">15</option>
+                  <option value="30" selected>30</option>
+                  <option value="60">60</option>
+                  <option value="120">120</option>
+                </select>
+              </div>
+
+              <div class="config-controls">
+                <label style="color: var(--gray); font-size: 14px"
+                  >Words:</label
+                >
+                <select class="config-select" id="wordsSelect">
+                  <option value="10">10</option>
+                  <option value="25" selected>25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+
+              <button class="apply-config-btn" id="applyConfigBtn">
+                Apply Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <section id="game">
       <div id="testConfig">
         <div class="mode">
@@ -233,7 +686,7 @@
       </div>
       <time></time>
       <p></p>
-      <input autofocus />
+      <input />
     </section>
     <section id="results">
       <h2>record</h2>
@@ -272,17 +725,20 @@
 
   // Obtener configuración guardada o usar valores por defecto
   let optionTime =
-    window.localStorage.getItem("time") || config.time.toString();
+    window.localStorage.getItem("time") ?? config.time.toString();
   let optionWords =
-    window.localStorage.getItem("words") || config.words.toString();
-  let currentMode = window.localStorage.getItem("mode") || "time";
+    window.localStorage.getItem("words") ?? config.words.toString();
+  let currentMode = window.localStorage.getItem("mode") ?? "time";
+  let userName = window.localStorage.getItem("userName") ?? "You";
+  let totalTimePlayed =
+    Number(window.localStorage.getItem("totalTimePlayed")) ?? 0;
 
   const $timeConfig = document.querySelector("#timeConfig");
   const $wordsConfig = document.querySelector("#wordsConfig");
   const $time = document.querySelector("time");
   const $paragraph = document.querySelector("p");
-  const $input = document.querySelector("input");
   const $game = document.querySelector("#game");
+  const $input = $game.querySelector("input"); // Input del juego específicamente
   const $results = document.querySelector("#results");
   const $wpm = $results.querySelector("#results-wpm");
   const $record = $results.querySelector("#results-record");
@@ -295,9 +751,13 @@
   let words = [];
   let currentTime = INITIAL_TIME;
   let playing;
+  let gameStartTime = 0;
+  let justReloaded = false;
+
   initConfigMenu();
   initGame();
   initEvents();
+  initProfile();
   function initConfigMenu() {
     // Restaurar el modo guardado
     if (currentMode === "words") {
@@ -354,11 +814,24 @@
     // Configurar botones de tiempo
     $timeConfig.querySelectorAll("button").forEach((button) =>
       button.addEventListener("click", (event) => {
+        console.log("Click en botón de tiempo detectado");
         // Obtener el botón clickeado (puede ser el button o un elemento hijo)
         const clickedButton = event.currentTarget;
         const timeConfig = clickedButton.querySelector("span")?.innerHTML;
+        console.log("Valor de tiempo:", timeConfig);
 
         if (timeConfig) {
+          // Cambiar automáticamente a modo "time"
+          currentMode = "time";
+          window.localStorage.setItem("mode", "time");
+          console.log("Modo cambiado a time");
+
+          // Actualizar botones time/words visualmente
+          $btnTime.classList.add("active");
+          $btnWords.classList.remove("active");
+          $timeConfig.style.display = "flex";
+          $wordsConfig.style.display = "none";
+
           const btn = $timeConfig.querySelectorAll("button");
           btn.forEach((btn) => {
             if (btn.querySelector("span").innerHTML === timeConfig) {
@@ -383,6 +856,16 @@
         const wordConfig = clickedButton.querySelector("span")?.innerHTML;
 
         if (wordConfig) {
+          // Cambiar automáticamente a modo "words"
+          currentMode = "words";
+          window.localStorage.setItem("mode", "words");
+
+          // Actualizar botones time/words visualmente
+          $btnWords.classList.add("active");
+          $btnTime.classList.remove("active");
+          $wordsConfig.style.display = "flex";
+          $timeConfig.style.display = "none";
+
           const btn = $wordsConfig.querySelectorAll("button");
           btn.forEach((btn) => {
             if (!btn.querySelector("span")) return;
@@ -405,13 +888,32 @@
     $input.value = "";
 
     playing = false;
+    justReloaded = true;
+
+    // Resetear el flag después de un delay más largo
+    setTimeout(() => {
+      justReloaded = false;
+    }, 200);
+
+    // Hacer focus después de un delay adicional
+    setTimeout(() => {
+      $input.focus();
+    }, 250);
+
+    // Actualizar INITIAL_TIME según el modo
+    INITIAL_TIME = Number(optionTime);
+
+    // Determinar cuántas palabras usar según el modo
+    const wordCount =
+      currentMode === "words" ? Number(optionWords) : Number(optionWords);
 
     words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(
       0,
-      Number(optionWords)
+      wordCount
     );
     currentTime = INITIAL_TIME;
 
+    // Siempre mostrar el tiempo
     $time.textContent = currentTime;
 
     $paragraph.innerHTML = words
@@ -431,10 +933,126 @@
   }
 
   function initEvents() {
-    document.addEventListener("keydown", () => {
+    document.addEventListener("keydown", (e) => {
+      // No hacer nada si acabamos de recargar
+      if (justReloaded) {
+        return;
+      }
+
+      // No hacer focus si el modal está abierto
+      const $profileModal = document.getElementById("profileModal");
+      const isModalOpen = $profileModal.classList.contains("show");
+
+      // Solo bloquear si estamos escribiendo en inputs del modal (no el input del juego)
+      const isTypingInModalInput =
+        e.target !== $input &&
+        (e.target.tagName === "INPUT" ||
+          e.target.tagName === "TEXTAREA" ||
+          e.target.tagName === "SELECT");
+
+      if (isModalOpen ?? isTypingInModalInput) {
+        return;
+      }
+
+      // Lista de teclas que NO deben iniciar el juego
+      const ignoredKeys = [
+        "Shift",
+        "Control",
+        "Alt",
+        "Meta",
+        "CapsLock",
+        "Tab",
+        "Escape",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+        "Insert",
+        "Delete",
+        "NumLock",
+        "ScrollLock",
+        "Pause",
+        "ContextMenu",
+      ];
+
+      // No iniciar el juego con teclas especiales
+      if (ignoredKeys.includes(e.key)) {
+        return;
+      }
+
       $input.focus();
+    });
+
+    // Iniciar el juego solo cuando se escribe en el input del juego
+    $input.addEventListener("keydown", (e) => {
+      // No iniciar si acabamos de recargar
+      if (justReloaded) {
+        return;
+      }
+
+      // Lista de teclas que NO deben iniciar el juego
+      const ignoredKeys = [
+        "Shift",
+        "Control",
+        "Alt",
+        "Meta",
+        "CapsLock",
+        "Tab",
+        "Escape",
+        "ArrowUp",
+        "ArrowDown",
+        "ArrowLeft",
+        "ArrowRight",
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9",
+        "F10",
+        "F11",
+        "F12",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+        "Insert",
+        "Delete",
+        "NumLock",
+        "ScrollLock",
+        "Pause",
+        "ContextMenu",
+      ];
+
+      // No iniciar el juego con teclas especiales
+      if (ignoredKeys.includes(e.key)) {
+        return;
+      }
+
       if (!playing) {
         playing = true;
+        gameStartTime = Date.now();
+
+        // Iniciar timer (cuenta regresiva siempre)
         const intervalId = setInterval(() => {
           currentTime--;
           $time.textContent = currentTime;
@@ -445,10 +1063,167 @@
           }
         }, 1000);
       }
+      onKeyDown(e);
     });
-    $input.addEventListener("keydown", onKeyDown);
+
     $input.addEventListener("keyup", onKeyUp);
     $button.addEventListener("click", initGame);
+  }
+
+  function initProfile() {
+    const $profileBtn = document.getElementById("profileBtn");
+    const $profileModal = document.getElementById("profileModal");
+    const $closeModal = document.getElementById("closeModal");
+    const $editNameBtn = document.getElementById("editNameBtn");
+    const $saveNameBtn = document.getElementById("saveNameBtn");
+    const $nameInput = document.getElementById("nameInput");
+    const $nameDisplay = document.getElementById("nameDisplay");
+    const $nameEdit = document.getElementById("nameEdit");
+    const $displayName = document.getElementById("displayName");
+    const $editConfigBtn = document.getElementById("editConfigBtn");
+    const $configEdit = document.getElementById("configEdit");
+    const $applyConfigBtn = document.getElementById("applyConfigBtn");
+    const $modeSelect = document.getElementById("modeSelect");
+    const $timeSelect = document.getElementById("timeSelect");
+    const $wordsSelect = document.getElementById("wordsSelect");
+
+    // Mostrar nombre guardado
+    $displayName.textContent = userName;
+
+    // Abrir modal
+    $profileBtn.addEventListener("click", () => {
+      updateProfileModal();
+      $profileModal.classList.add("show");
+    });
+
+    // Cerrar modal
+    $closeModal.addEventListener("click", () => {
+      $profileModal.classList.remove("show");
+    });
+
+    // Cerrar al hacer click fuera del modal
+    $profileModal.addEventListener("click", (e) => {
+      if (e.target === $profileModal) {
+        $profileModal.classList.remove("show");
+      }
+    });
+
+    // Editar nombre
+    $editNameBtn.addEventListener("click", () => {
+      $nameInput.value = userName;
+      $nameDisplay.style.display = "none";
+      $nameEdit.style.display = "block";
+      $nameInput.focus();
+    });
+
+    // Guardar nombre
+    $saveNameBtn.addEventListener("click", () => {
+      const newName = $nameInput.value.trim() ?? "You";
+      userName = newName;
+      window.localStorage.setItem("userName", userName);
+      $displayName.textContent = userName;
+      $nameDisplay.style.display = "block";
+      $nameEdit.style.display = "none";
+    });
+
+    // Guardar con Enter
+    $nameInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        $saveNameBtn.click();
+      }
+    });
+
+    // Editar configuración
+    $editConfigBtn.addEventListener("click", () => {
+      // Establecer valores actuales en los selects
+      $modeSelect.value = currentMode;
+      $timeSelect.value = optionTime;
+      $wordsSelect.value = optionWords;
+
+      $editConfigBtn.style.display = "none";
+      $configEdit.style.display = "block";
+    });
+
+    // Aplicar cambios de configuración
+    $applyConfigBtn.addEventListener("click", () => {
+      const newMode = $modeSelect.value;
+      const newTime = $timeSelect.value;
+      const newWords = $wordsSelect.value;
+
+      // Actualizar variables globales
+      currentMode = newMode;
+      optionTime = newTime;
+      optionWords = newWords;
+
+      // Guardar en localStorage
+      window.localStorage.setItem("mode", newMode);
+      window.localStorage.setItem("time", newTime);
+      window.localStorage.setItem("words", newWords);
+
+      // Actualizar UI del juego (botones time/words)
+      if (currentMode === "words") {
+        $wordsConfig.style.display = "flex";
+        $timeConfig.style.display = "none";
+        $btnWords.classList.add("active");
+        $btnTime.classList.remove("active");
+      } else {
+        $timeConfig.style.display = "flex";
+        $wordsConfig.style.display = "none";
+        $btnTime.classList.add("active");
+        $btnWords.classList.remove("active");
+      }
+
+      // Actualizar botones activos
+      updateGameConfig();
+
+      // Actualizar modal
+      updateProfileModal();
+
+      // Ocultar edición
+      $editConfigBtn.style.display = "inline-block";
+      $configEdit.style.display = "none";
+
+      // Reiniciar juego con nueva configuración
+      initGame();
+    });
+  }
+
+  function updateProfileModal() {
+    const record = window.localStorage.getItem("record") ?? "0";
+    const timePlayed = Math.round(totalTimePlayed / 60); // convertir a minutos
+
+    document.getElementById("profileRecord").textContent = record;
+    document.getElementById("profileTime").textContent = timePlayed;
+    document.getElementById("profileMode").textContent = currentMode;
+    document.getElementById("profileTimeConfig").textContent = optionTime + "s";
+    document.getElementById("profileWordsConfig").textContent = optionWords;
+  }
+
+  function updateGameConfig() {
+    // Actualizar botones de tiempo
+    const timeButtons = $timeConfig.querySelectorAll("button");
+    timeButtons.forEach((btn) => {
+      const timeValue = btn.getAttribute("timeconfig");
+      if (timeValue === optionTime) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    // Actualizar botones de palabras
+    const wordButtons = $wordsConfig.querySelectorAll("button");
+    wordButtons.forEach((btn) => {
+      const wordValue = btn.getAttribute("wordcount");
+      if (wordValue === optionWords) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    // Actualizar INITIAL_TIME
+    INITIAL_TIME = Number(optionTime);
   }
 
   function onKeyDown(event) {
@@ -552,6 +1327,12 @@
     $game.style.display = "none";
     $results.style.display = "flex";
 
+    // Calcular tiempo jugado
+    const gameEndTime = Date.now();
+    const sessionTime = Math.round((gameEndTime - gameStartTime) / 1000); // en segundos
+    totalTimePlayed += sessionTime;
+    window.localStorage.setItem("totalTimePlayed", totalTimePlayed.toString());
+
     const correctWords = $paragraph.querySelectorAll("word.correct").length;
     const correctLetter = $paragraph.querySelectorAll("letter.correct").length;
     const incorrectLetter =
@@ -566,7 +1347,7 @@
     $wpm.textContent = wpm;
 
     // Obtener el récord actual SIEMPRE desde localStorage (no usar variable cacheada)
-    const currentRecord = Number(window.localStorage.getItem("record")) || 0;
+    const currentRecord = Number(window.localStorage.getItem("record")) ?? 0;
 
     // Comparar y actualizar el récord si es necesario
     if (wpm > currentRecord) {

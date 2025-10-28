@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TypeFaster - Logo Options</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a1a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e8e8e8;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #daaf38;
+      font-size: 36px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #999;
+      margin-bottom: 50px;
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo-card {
+      background: #222;
+      border: 2px solid #333;
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .logo-card:hover {
+      border-color: #daaf38;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(218, 175, 56, 0.2);
+    }
+
+    .logo-preview {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 40px 20px;
+      margin-bottom: 20px;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #daaf38;
+    }
+
+    .logo-name {
+      font-size: 18px;
+      color: #999;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .logo-description {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .copy-btn {
+      background: #daaf38;
+      color: #1a1a1a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: #c9a030;
+      transform: scale(1.05);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .icon-large {
+      font-size: 42px;
+    }
+
+    .icon-medium {
+      font-size: 32px;
+    }
+
+    .badge {
+      background: #daaf38;
+      color: #1a1a1a;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-left: 10px;
+    }
+
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #daaf38;
+    }
+  </style>
+</head>
+<body>
+  <h1>TypeFaster Logo Options</h1>
+  <p class="subtitle">Elige el logo que más te guste para tu proyecto</p>
+
+  <h2 style="text-align: center; margin: 60px 0 30px 0; color: #daaf38; font-size: 32px;">Iconos de Perfil</h2>
+  <p class="subtitle" style="margin-bottom: 40px;">Elige el icono para el botón de perfil</p>
+
+  <div class="grid">
+    <!-- Profile Icon 1: User Emoji -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 1 - User Emoji</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">👤</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Emoji de usuario clásico (actual).
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('👤')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 2: Person -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 2 - Person</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">👨</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Persona con más detalle.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('👨')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 3: Avatar -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 3 - Avatar</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">🧑</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Avatar neutral y moderno.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('🧑')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 4: Letter U -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 4 - Letter U <span class="badge">Minimal</span></div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 20px; color: #daaf38; font-weight: 700;">U</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Letra U (User). Minimalista y consistente con el logo.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIconLetter('U')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 5: Gear -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 5 - Settings</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">⚙️</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Engranaje para configuración/perfil.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('⚙️')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 6: Menu -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 6 - Menu</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">☰</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Menú hamburguesa simple.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('☰')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 7: Circle User -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 7 - Circle User</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">⭕</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Círculo simple y minimalista.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('⭕')">Copiar código</button>
+    </div>
+
+    <!-- Profile Icon 8: Star User -->
+    <div class="logo-card">
+      <div class="logo-name">Perfil 8 - Star</div>
+      <div class="logo-preview">
+        <button style="background: transparent; border: 2px solid #444; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <span style="font-size: 24px;">⭐</span>
+        </button>
+      </div>
+      <div class="logo-description">
+        Estrella para perfil destacado.
+      </div>
+      <button class="copy-btn" onclick="copyProfileIcon('⭐')">Copiar código</button>
+    </div>
+  </div>
+
+  <h2 style="text-align: center; margin: 60px 0 30px 0; color: #daaf38; font-size: 32px;">Logos del Proyecto</h2>
+  <p class="subtitle" style="margin-bottom: 40px;">Elige el logo principal para TypeFaster</p>
+
+  <div class="grid">
+    <!-- Logo 1: Keyboard Emoji -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 1 - Keyboard</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⌨️</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Emoji de teclado clásico. Simple y directo.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⌨️', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 2: Lightning Bolt -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 2 - Lightning <span class="badge">Popular</span></div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⚡</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Rayo para representar velocidad y rapidez al escribir.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⚡', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 3: Rocket -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 3 - Rocket</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">🚀</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Cohete simbolizando velocidad y progreso.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('🚀', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 4: Fire -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 4 - Fire</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">🔥</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Fuego para representar intensidad y velocidad ardiente.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('🔥', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 5: Zap -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 5 - Zap</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⚡️</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Variante del rayo con más énfasis visual.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⚡️', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 6: Stopwatch -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 6 - Stopwatch</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⏱️</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Cronómetro para enfatizar el aspecto de tiempo.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⏱️', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 7: Pencil -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 7 - Pencil</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">✏️</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Lápiz representando escritura y práctica.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('✏️', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 8: Target -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 8 - Target</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">🎯</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Diana para representar precisión y objetivos.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('🎯', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 9: Trophy -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 9 - Trophy</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">🏆</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Trofeo simbolizando logros y récords personales.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('🏆', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 10: Letter T -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 10 - Letter T <span class="badge">Minimal</span></div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large" style="background: #daaf38; color: #1a1a1a; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 700;">T</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Letra T en un cuadrado. Minimalista y profesional.
+      </div>
+      <button class="copy-btn" onclick="copyLogoCustom('T')">Copiar código</button>
+    </div>
+
+    <!-- Logo 11: Speedometer -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 11 - Speedometer</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">📊</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Gráfico representando estadísticas y progreso.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('📊', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 12: Star -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 12 - Star</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⭐</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Estrella para destacar excelencia y calidad.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⭐', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 13: Monogram TF -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 13 - Monogram</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large" style="background: #daaf38; color: #1a1a1a; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 700; font-size: 24px;">TF</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Monograma TF. Profesional y memorable.
+      </div>
+      <button class="copy-btn" onclick="copyLogoCustom('TF')">Copiar código</button>
+    </div>
+
+    <!-- Logo 14: Gauge -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 14 - Gauge</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">⏲️</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Medidor de velocidad, perfecto para WPM.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('⏲️', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 15: Checkmark -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 15 - Checkmark</div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">✅</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Check para representar precisión y corrección.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('✅', 'TypeFaster')">Copiar código</button>
+    </div>
+
+    <!-- Logo 16: Sparkles -->
+    <div class="logo-card">
+      <div class="logo-name">Opción 16 - Sparkles <span class="badge">Modern</span></div>
+      <div class="logo-preview">
+        <div class="logo">
+          <span class="icon-large">✨</span>
+          <span>TypeFaster</span>
+        </div>
+      </div>
+      <div class="logo-description">
+        Destellos para un look moderno y dinámico.
+      </div>
+      <button class="copy-btn" onclick="copyLogo('✨', 'TypeFaster')">Copiar código</button>
+    </div>
+  </div>
+
+  <script>
+    function copyProfileIcon(icon) {
+      const code = `<span class="profile-icon">${icon}</span>`;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        alert('¡Código del icono copiado! Reemplaza el contenido de <span class="profile-icon"> en tu index.html');
+      });
+    }
+
+    function copyProfileIconLetter(letter) {
+      const code = `<span class="profile-icon" style="color: var(--yellow); font-weight: 700;">${letter}</span>`;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        alert('¡Código del icono copiado! Reemplaza el contenido de <span class="profile-icon"> en tu index.html');
+      });
+    }
+
+    function copyLogo(icon, text) {
+      const code = `<div class="logo">
+  <span class="logo-icon">${icon}</span>
+  <span>${text}</span>
+</div>`;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        alert('¡Código copiado! Pega en tu index.html');
+      });
+    }
+
+    function copyLogoCustom(letter) {
+      const code = `<div class="logo">
+  <span class="logo-icon" style="background: var(--yellow); color: var(--black); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 700;">${letter}</span>
+  <span>TypeFaster</span>
+</div>`;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        alert('¡Código copiado! Pega en tu index.html y ajusta los estilos CSS');
+      });
+    }
+  </script>
+</body>
+</html>
