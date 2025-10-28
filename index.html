@@ -269,8 +269,14 @@
 <script type="module">
   import { words as INITIAL_WORDS } from "./words.js";
   import { config } from "./config.js";
-  let optionTime = window.localStorage.getItem("time");
-  let optionWords = window.localStorage.getItem("words");
+
+  // Obtener configuración guardada o usar valores por defecto
+  let optionTime =
+    window.localStorage.getItem("time") || config.time.toString();
+  let optionWords =
+    window.localStorage.getItem("words") || config.words.toString();
+  let currentMode = window.localStorage.getItem("mode") || "time";
+
   const $timeConfig = document.querySelector("#timeConfig");
   const $wordsConfig = document.querySelector("#wordsConfig");
   const $time = document.querySelector("time");
@@ -285,28 +291,28 @@
   const $btnTime = document.querySelector("#btnTime");
   const $btnWords = document.querySelector("#btnWords");
 
-  const $localStorageRecord = window.localStorage.getItem("record");
-
-  let INITIAL_TIME = 0;
+  let INITIAL_TIME = Number(optionTime);
   let words = [];
-  if (optionTime) {
-    INITIAL_TIME = optionTime;
-  } else {
-    INITIAL_TIME = config.time;
-    window.localStorage.setItem("time", config.time);
-  }
-
-  if (!optionWords) {
-    optionWords = config.words;
-    window.localStorage.setItem("words", config.words);
-  }
-  console.log(optionWords);
   let currentTime = INITIAL_TIME;
   let playing;
   initConfigMenu();
   initGame();
   initEvents();
   function initConfigMenu() {
+    // Restaurar el modo guardado
+    if (currentMode === "words") {
+      $wordsConfig.style.display = "flex";
+      $timeConfig.style.display = "none";
+      $btnWords.classList.add("active");
+      $btnTime.classList.remove("active");
+    } else {
+      $timeConfig.style.display = "flex";
+      $wordsConfig.style.display = "none";
+      $btnTime.classList.add("active");
+      $btnWords.classList.remove("active");
+    }
+
+    // Marcar el botón de tiempo activo
     $timeConfig.querySelectorAll("button").forEach((btn) => {
       if (btn.querySelector("span").innerHTML === optionTime) {
         btn.classList.add("active");
@@ -314,38 +320,51 @@
         btn.classList.remove("active");
       }
     });
+
+    // Marcar el botón de palabras activo
     $wordsConfig.querySelectorAll("button").forEach((btn) => {
       if (!btn.querySelector("span")) return;
-      console.log(btn.querySelector("span").innerHTML, optionWords);
       if (btn.querySelector("span").innerHTML === optionWords) {
         btn.classList.add("active");
       } else {
         btn.classList.remove("active");
       }
     });
+
+    // Cambiar a modo tiempo
     $btnTime.addEventListener("click", (event) => {
+      currentMode = "time";
+      window.localStorage.setItem("mode", "time");
       $timeConfig.style.display = "flex";
       $btnTime.classList.add("active");
       $wordsConfig.style.display = "none";
       $btnWords.classList.remove("active");
     });
+
+    // Cambiar a modo palabras
     $btnWords.addEventListener("click", (event) => {
+      currentMode = "words";
+      window.localStorage.setItem("mode", "words");
       $wordsConfig.style.display = "flex";
       $btnWords.classList.add("active");
       $timeConfig.style.display = "none";
       $btnTime.classList.remove("active");
     });
 
+    // Configurar botones de tiempo
     $timeConfig.querySelectorAll("button").forEach((button) =>
       button.addEventListener("click", (event) => {
-        const timeConfig = event.target.innerHTML;
+        // Obtener el botón clickeado (puede ser el button o un elemento hijo)
+        const clickedButton = event.currentTarget;
+        const timeConfig = clickedButton.querySelector("span")?.innerHTML;
+
         if (timeConfig) {
           const btn = $timeConfig.querySelectorAll("button");
           btn.forEach((btn) => {
             if (btn.querySelector("span").innerHTML === timeConfig) {
               btn.classList.add("active");
               window.localStorage.setItem("time", timeConfig);
-              INITIAL_TIME = timeConfig;
+              INITIAL_TIME = Number(timeConfig);
               optionTime = timeConfig;
               initGame();
             } else {
@@ -356,9 +375,13 @@
       })
     );
 
+    // Configurar botones de palabras
     $wordsConfig.querySelectorAll("button").forEach((button) =>
       button.addEventListener("click", (event) => {
-        const wordConfig = event.target.innerHTML;
+        // Obtener el botón clickeado (puede ser el button o un elemento hijo)
+        const clickedButton = event.currentTarget;
+        const wordConfig = clickedButton.querySelector("span")?.innerHTML;
+
         if (wordConfig) {
           const btn = $wordsConfig.querySelectorAll("button");
           btn.forEach((btn) => {
@@ -385,7 +408,7 @@
 
     words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(
       0,
-      optionWords
+      Number(optionWords)
     );
     currentTime = INITIAL_TIME;
 
@@ -539,19 +562,20 @@
     const accuracy =
       totalLetters > 0 ? (correctLetter / totalLetters) * 100 : 0;
 
-    const wpm = (correctWords * 60) / INITIAL_TIME;
-    $wpm.textContent = wpm || 0;
-    if (!isNaN($localStorageRecord)) {
-      $record.textContent = $localStorageRecord;
-      console.log($wpm.textContent, Number($localStorageRecord));
-      if ($wpm.textContent > Number($localStorageRecord)) {
-        window.localStorage.setItem("record", $wpm.textContent);
-        $record.textContent = $wpm.textContent;
-      }
-    } else {
-      window.localStorage.setItem("record", wpm);
+    const wpm = Math.round((correctWords * 60) / INITIAL_TIME);
+    $wpm.textContent = wpm;
+
+    // Obtener el récord actual SIEMPRE desde localStorage (no usar variable cacheada)
+    const currentRecord = Number(window.localStorage.getItem("record")) || 0;
+
+    // Comparar y actualizar el récord si es necesario
+    if (wpm > currentRecord) {
+      window.localStorage.setItem("record", wpm.toString());
       $record.textContent = wpm;
+    } else {
+      $record.textContent = currentRecord;
     }
+
     $accuracy.textContent = `${accuracy.toFixed(2)}%`;
   }
 </script>
